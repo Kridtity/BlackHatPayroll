@@ -1,7 +1,7 @@
 #Author: Kridtity Ikhlaas Lawang
 #User Name: Dragon King
 #Program Name: paymod
-#Copyright: Copyright 2021, paymod
+#Copyright: Copyright (C) 2021 Kridtity Lawang
 
 #License: GNU GPLv3.0
 #Status: Release
