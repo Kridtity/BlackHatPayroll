@@ -4,9 +4,9 @@
 #Copyright: Copyright 2021, paymod
 
 #License: GNU GPLv3.0
-#Status: Development
-#Version: 0.0
-#Release Date: XX/XX/XXXX
+#Status: Release
+#Version: 1.0
+#Release Date: 29-09-2021
 #Description: Module for payroll calculation system for Blackhat IT
 
 #Formulas:

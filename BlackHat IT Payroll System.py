@@ -4,9 +4,9 @@
 #Copyright: Copyright 2021, Blackhat IT Payroll System
 
 #License: GNU GPLv3.0
-#Status: Development
-#Version: 0.0
-#Release Date: XX/XX/XXXX
+#Status: Release
+#Version: 1.0
+#Release Date: 29-09-2021
 #Description: Payroll calculation system for Blackhat IT
 
 #Import modules (paymod is self-created)
