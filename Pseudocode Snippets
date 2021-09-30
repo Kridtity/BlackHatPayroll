@@ -1,0 +1,11 @@
+#Function to calculate tax
+Function CalculateTax
+    Pass In: Salary
+    Tax ← 0
+    CASEWHERE Salary of
+        >= 0 <= 18200       : Tax ← 0
+        >= 18201 <= 45000   : Tax ← 0.19 * (Salary - 18200)
+        >= 45001 <= 120000  : Tax ← 0.325 * (Salary - 45000)
+        >= 120001 <= 180000 : Tax ← 0.37 * (Salary - 120000)
+        >= 180001           : Tax ← 0.45 * (Salary - 180000)
+    End Case
