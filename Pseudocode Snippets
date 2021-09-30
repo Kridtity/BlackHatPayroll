@@ -1,11 +1,133 @@
-#Function to calculate tax
-Function CalculateTax
+#Function to calculate tax from salary
+Function CalculateTaxFromSalary
     Pass In: Salary
+    
     Tax ← 0
-    CASEWHERE Salary of
+    
+    Case Salary of
         >= 0 <= 18200       : Tax ← 0
         >= 18201 <= 45000   : Tax ← 0.19 * (Salary - 18200)
         >= 45001 <= 120000  : Tax ← 0.325 * (Salary - 45000)
         >= 120001 <= 180000 : Tax ← 0.37 * (Salary - 120000)
         >= 180001           : Tax ← 0.45 * (Salary - 180000)
     End Case
+    
+    Pass Out: Tax
+End Function
+
+
+#Function to calculate tax from wage
+Function CalculateTaxFromWage
+    Pass In: Wage, PayCycle
+    
+    WeeklyIncome = (Wage / PayCycle) + 0.99
+    
+    If weekly_income < 88 then
+        a ← 0.1900
+        b ← 0.1900
+    Else If weekly_income < 371 then
+        a ← 0.2348
+        b ← 3.9639
+    Else If weekly_income < 515 then
+        a ← 0.2190
+        b ← -1.9003
+    Else If weekly_income < 932 then
+        a ← 0.3477
+        b ← 64.4297
+    Else If weekly_income < 1957 then
+        a ← 0.3450
+        b ← 61.9132
+    Else If weekly_income < 3111 then
+        a ← 0.3900
+        b ← 150.0093
+    Else If weekly_income >= 3111 then
+        a ← 0.4700
+        b ← 398.9324
+    Else
+        a ← 0
+        b ← 0
+     End If
+     
+     TaxWithheld ← ((a * WeeklyIncome) - b) * PayCycle)
+     
+     Pass Out: TaxWithheld
+End Function
+
+
+#Function to get employee salary and rates from position input
+Function EmployeePayDetails
+    Pass In: Position
+    
+    #Constants for reference
+    DEV_MANAGER_SALARY ← 180000
+    SENIOR_DEV_SALARY ← 150000
+    MID_DEV_SALARY ← 120000
+    JUNIOR_DEV_SALARY ← 80000
+
+    If Position == "Software Development Manager" then
+        Salary ← DEV_MANAGER_SALARY    
+    Else If Position == "Senior Software Developer" then
+        Salary ← SENIOR_DEV_SALARY
+    Else If Position == "Mid-level Software Developer" then
+        Salary ← MID_DEV_SALARY
+    Else If Position == "Junior Software Developer" then
+        Salary ← JUNIOR_DEV_SALARY
+    Else
+        Salary ← 0
+
+    HourlyRate ← Salary / (38 * 50)
+    OvertimeRate ← HourlyRate * 1.5
+    HolidayRate ← HourlyRate * 2
+    
+    Pass Out: Salary, HourlyRate, OvertimeRate, HolidayRate
+End Function
+
+
+#Function to calculate wage and other financial details based on hourly rates
+Function CalculateFromWwage
+    Pass In: Position, PayCycle, HoursWorked, OvertimeHoursWorked, HolidayHoursWorked
+    
+    #Gets employee pay details based on passed position
+    Salary ← EmployeePayDetails(Position)[0]
+    HourlyRate ← EmployeePayDetails(Position)[1]
+    OvertimeRate ← EmployeePayDetails(Position)[2]
+    HolidayRate ← EmployeePayDetails(Position)[3]
+
+    #Calculates wages based on hourly input
+    Wage ← (HourlyRate * HoursWorked) + (OvertimeRate * OvertimeHoursWorked) + (HolidayRate * HolidayHoursWorked)
+
+    #Calculates superannuation for pay cycle based on wage (rate at 10% pre-tax amount)
+    Superannuation ← Wage * 0.1
+
+    #Calculates tax withheld from pay cycle
+    PayCycleTax ← CalculateTaxFromWage(Wage, PayCycle)
+
+    #Calculates net wage
+    NetWage ← Wage - Superannuation - PayCycleTax
+    
+    Pass Out: Wage, Superannuation, PayCycleTax, NetWage
+End Function
+
+
+#Function to calculate slary portion recieved in the pay cycle and other financial details based annual salary
+Function CalculateFromSalary
+    Pass In: Position, PayCycle
+    
+    #Gets employee pay details based on passed position
+    Salary = EmployeePayDetails(Position)[0]
+    
+    #Gets employee salary portion for pay cycle
+    SalaryPortion = Salary * (PayCycle / 50)
+
+    #Calculates superannuation for pay cycle based on wage (rate at 10% pre-tax amount)
+    superannuation = SalaryPortion * 0.1
+
+    #Calculates tax * (pay cycle / 50) for pay cycle based on annual salary
+    GrossTax = CalculateTaxFromSalary(Salary)
+    PayCycleTax = GrossTax * (PayCycle / 50)
+
+    #Calculates net salary portion
+    NetSalaryPortion = SalaryPortion - Superannuation - PayCycleTax
+    
+    Pass Out: SalaryPortion, Superannuation, PayCycleTax, NetSalaryPortion
+End Function
