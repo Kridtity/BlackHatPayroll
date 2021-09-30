@@ -83,7 +83,7 @@ def calculate_tax_from_salary(salary):
     elif salary >= 45001 and salary <= 120000:
         tax = float(5092 + (0.325 * (salary - 45000)))
     elif salary >= 120001 and salary <= 180000:
-        tax = float(5092 + (0.325 * (salary - 45000)))
+        tax = float(29467 + (0.37 * (salary - 120000)))
     elif salary >= 180001:
         tax = float(51667 + (0.45 * (salary - 180000)))  
     else:
