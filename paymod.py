@@ -29,7 +29,8 @@
 #Import modules
 import math
 
-#Function to calculate wage
+
+#Function to calculate wage and other financial details based on hourly rates
 def calculate_from_wage(position, paycycle, hours_worked, overtime_hours_worked, holiday_hours_worked):
     #Gets employee pay details based on passed position
     salary = employee_pay_details(position)[0]
@@ -52,7 +53,7 @@ def calculate_from_wage(position, paycycle, hours_worked, overtime_hours_worked,
     return wage, superannuation, paycycle_tax, net_wage
 
 
-#Function to calculate from salary
+#Function to calculate salary portion recieved in the pay cycle and other financial details based annual salary
 def calculate_from_salary(position, paycycle):
     #Gets employee pay details based on passed position
     salary = employee_pay_details(position)[0]
