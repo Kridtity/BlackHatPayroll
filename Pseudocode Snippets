@@ -109,7 +109,7 @@ Function CalculateFromWwage
 End Function
 
 
-#Function to calculate salary portion recieved in the pay cycle and other financial details based annual salary
+#Function to calculate salary portion received in the pay cycle and other financial details based annual salary
 Function CalculateFromSalary
     Pass In: Position, PayCycle
     
