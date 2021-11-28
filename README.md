@@ -11,6 +11,7 @@ This Year 11 Computer Science ATAR project is a payroll program system for hypot
      + [I => Input employee pay details](#i--input-employee-pay-details)
      + [P => Print last payroll session in IDLE Shell/command line](#p--print-last-payroll-session-in-idle-shellcommand-line)
      + [H => Help manual](#h--help-manual)
+     + [S => Change settings](#s--change-settings)
      + [E => Exit the program ](#e--exit-the-program)
    + [Input employee pay details menu](#input-employee-pay-details-menu)
      + [H => Calculate payroll based on hourly rate and hours worked](#h--calculate-payroll-based-on-hourly-rate-and-hours-worked)
@@ -20,7 +21,7 @@ This Year 11 Computer Science ATAR project is a payroll program system for hypot
 ### Assumptions:
 1. Superannuation is calculated at a rate of 10% gross income (pre-tax amount)
 2. Tax is calculated at the rates of the 2021–2022 financial year
-3. Managers receive an average annual salary of $180 000
+3. Software Development Managers receive an average annual salary of $180 000
 4. Senior Software Developers receive $150 000, Mid-level Software Developers $130 000, and Junior Software Developers $80 000 as their respective annual salary
 5. Employees work for a maximum of 38 hours per week (excluding overtime and other reasonable additional hours)
 6. The hourly rate for the employees will be calculated based on Assumption 4
@@ -31,7 +32,7 @@ This Year 11 Computer Science ATAR project is a payroll program system for hypot
 
 ## Part B:
 ### Main Menu
-The main menu provides four options for the selection of the main functionality of the program:
+The main menu provides five options for the selection of the main functionality of the program:
 1. I => Input employee pay details
 2. P => Print last payroll session in IDLE Shell/command line
 3. H => Help manual
@@ -46,7 +47,10 @@ Typing the letter 'I' results in another menu being displayed providing the opti
 This option prints the last payroll session saved in the 'payroll.txt' file into the the IDLE Shell/command line. If there is no file or previous payroll session, an exception will be thrown and error printed to the IDLE Shell/command line.  
 
 #### H => Help manual
-This option prints the list of [Assumptions](#assumptions) and a link to [this](https://github.com/Kridtity/BlackHatPayroll/blob/main/README.md) user manual and option to open in browser if more help is required.  
+This option prints the list of [Assumptions](#assumptions) and a link to [this](https://github.com/Kridtity/BlackHatPayroll/blob/main/README.md) user manual and option to open in browser if more help is required.
+
+#### S => Change settings
+This option allows the user to change the default assumed salries for each of the four main job positions, namely: Software Development Manager, Senior Software Developer, Mid-Level Software Developer, and Junior Software Developer. It saves all salary values to a text (.txt) file called 'salaries.txt'. [Three menu options](#settings-menu) are available on the settings screen for the editing of salary data, saving the salry data and returning to the main menu, and reseting the salary data to its default assumed values.
 
 #### E => Exit the program 
 This option attempts to quit the program, either immediately closing it or displaying a prompt asking for confirmation to kill the program.  
@@ -60,7 +64,23 @@ Two options are available in this menu:
 Whichever option chosen, the prompt 'Enter pay cycle in full weeks' refers to the number of full weeks in the chosen pay cycle, and the prompt 'Enter number of employees' refers to the number of employees who worked or are to be payed in/during/for the input pay cycle.  
 
 #### H => Calculate payroll based on hourly rate and hours worked
-This option is used for calculating the payroll during a pay cycle in which employees do not work the assumed standard 38 hours per week. It is used for calculating payrolls when employees work for more or less than 38 hours per week or the selected pay cycle equivalent, or if any employees have worked overtime or holiday hours during the pay cycle.  
+This option is used for calculating the payroll during a pay cycle in which employees do not work the assumed standard 38 hours per week. It is used for calculating payrolls when employees work for more or less than 38 hours per week or the selected pay cycle equivalent, or if any employees have worked overtime or holiday hours during the pay cycle. 
 
 #### S => Calculate payroll based on annual salary
 This option is used for calculating the payroll when all employees worked 38 standard hours per week or their pay cycle equivalent. Overtime and holiday hours worked are not factored into calculations under this option.
+
+
+### Settings menu
+Three Options are available in this menu:
+1. E => Edit salary details
+2. S => Save and go back to main menu
+3. D => Reset values to default
+
+#### E => Edit salary details
+Allows the user to edit salary details for the four main job positions.
+
+#### S => Save and go back to main menu
+Saves the salary details to the 'salaries.txt' file (changed or unchanged) and returns to the main menu.
+
+#### D => Reset values to default
+Resets all salary details to their default assumed values.
