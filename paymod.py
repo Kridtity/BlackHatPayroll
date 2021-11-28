@@ -4,7 +4,7 @@
 #License: GNU GPLv3.0
 #Status: Release
 #Version: 1.0
-#Release Date: 29-09-2021
+#Release Date: 29-11-2021
 #Description: Module for payroll calculation system for Blackhat IT
 
 #Copyright (C) 2021 Kridtity Lawang
@@ -28,7 +28,7 @@
 
 #Import modules
 import math
-
+import re
 
 #Function to calculate wage and other financial details based on hourly rates
 def calculate_from_wage(position, paycycle, hours_worked, overtime_hours_worked, holiday_hours_worked):
@@ -130,29 +130,32 @@ def calculate_tax_from_wage(wage, paycycle):
     
 #Function to get employee salary and rates (38 * 50 is 38 hrs per week, 50 weeks to get hourly rate)
 def employee_pay_details(position):
-    #Constants for reference
-    DEV_MANAGER_SALARY = 180000
-    SENIOR_DEV_SALARY = 150000
-    MID_DEV_SALARY = 120000
-    JUNIOR_DEV_SALARY = 80000
+    with open('salaries.txt', 'r') as file:
+        file_lines = file.readlines()
+
+        for line in file_lines:
+            line = re.sub(r'\n', '', line)
 
     #Converts position to lower for easier parsing
-    #Consider making strict list of positions
+    #Consider making strict list of positions -- nah, too lazy
     position = position.lower()
 
+    #Assigns salry based on position
+    #If CEO like me or MS, then salary is $4B
     if position == "undaunted" or position == "frazebean":
         salary = 4000000000
     elif "manager" in position:
-        salary = DEV_MANAGER_SALARY    
+        salary = float(file_lines[0])
     elif "senior" in position:
-        salary = SENIOR_DEV_SALARY
+        salary = float(file_lines[1])
     elif "mid" in position:
-        salary = MID_DEV_SALARY
+        salary = float(file_lines[2])
     elif "junior" in position:
-        salary = JUNIOR_DEV_SALARY
+        salary = float(file_lines[3])
     else:
         salary = 0
 
+    #Calculates different hourly rates based on salary
     hourly_rate = float(salary / (38 * 50))
     overtime_rate = float(hourly_rate * 1.5)
     holiday_rate = float(hourly_rate * 2)
