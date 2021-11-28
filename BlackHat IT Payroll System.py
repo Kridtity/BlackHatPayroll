@@ -4,7 +4,7 @@
 #License: GNU GPLv3.0
 #Status: Release
 #Version: 1.0
-#Release Date: 29-09-2021
+#Release Date: 29-11-2021
 #Description: Payroll calculation system for Blackhat IT
 
 #Copyright (C) 2021 Kridtity Lawang
@@ -26,6 +26,8 @@
 import paymod
 import re
 import webbrowser
+import importlib
+import payroll
 
 #Initialise lists
 first_names_list = []
@@ -56,11 +58,10 @@ menu_select = input("------------------------------\n"
                     "Enter: I => Input employee pay details\n"
                     "       P => Print last payroll session in IDLE Shell/command line\n"
                     "       H => Help manual\n"
+                    "       S => Change settings\n"
                     "       E => Exit the program\n").upper()
 
 if menu_select == "I":
-    print("\n")
-
     #Print mode choices: hourly rate for hours worked in pay cycle or pay cycle amounts from annual salary
     mode = input("------------------------------\n"
                  "| Input employee pay details |\n"
@@ -155,7 +156,6 @@ if menu_select == "I":
         wait_to_close()
 
     #Print payroll summary to Shell output
-    #Make so as to print to file as well
     print("------------------------------\n"
           "|       Payroll Summary      |\n"
           "------------------------------\n")
@@ -166,7 +166,7 @@ if menu_select == "I":
     for x in range(num_employees):
         print(last_names_list[x] + ", " + first_names_list[x])
         print(positions_list[x])
-        print("Annual salary: ${}".format(salaries_list[x]))
+        print("Annual salary: ${:.2f}".format(salaries_list[x]))
         print("")
         print("Standard hours worked: {:.2f}\nOvertime hours worked: {:.2f}\nHoliday hours worked: {:.2f}".format(hours_list[x], overtime_hours_list[x], holiday_hours_list[x]))
         print("")
@@ -190,7 +190,7 @@ if menu_select == "I":
         for x in range(num_employees):
             file.write(last_names_list[x] + ", " + first_names_list[x] + "\n")
             file.write(positions_list[x] + "\n")
-            file.write("Annual salary: ${}\n\n".format(salaries_list[x]))
+            file.write("Annual salary: ${:.2f}\n\n".format(salaries_list[x]))
             file.write("Standard hours worked: {:.2f}\nOvertime hours worked: {:.2f}\nHoliday hours worked: {:.2f}\n\n".format(hours_list[x], overtime_hours_list[x], holiday_hours_list[x]))
             file.write("Gross income:            ${:.2f}\n".format(gross_incomes_list[x]))
             file.write("Superannuation withheld: ${:.2f}\n".format(supers_list[x]))
@@ -257,11 +257,69 @@ elif menu_select == "H":
     else:
         quit()
     
+elif menu_select == "S":
+    print("------------------------------\n"
+          "|          Settings          |\n"
+          "------------------------------")
+    
+    #Default values for reference
+    #DEV_MANAGER_SALARY = 180000
+    #SENIOR_DEV_SALARY = 150000
+    #MID_DEV_SALARY = 120000
+    #JUNIOR_DEV_SALARY = 80000
+
+    #Gets current salaries
+    with open('salaries.txt', 'r') as file:
+        file_lines = file.readlines()
+
+        #Print current settings
+        print("Current salaries for positions:")
+        print("Software Development Manager: {}"
+              "Senior Software Developer: {}"
+              "Mid-level Software Developer: {}"
+              "Junior Software Developer: {}\n".format(file_lines[0], file_lines[1], file_lines[2], file_lines[3]))
+        
+    while True:
+        menu_select = input("Enter: E => Edit salary details\n"
+                            "       S => Save and go back to main menu\n"
+                            "       D => Reset values to default\n").upper()
+          
+        if menu_select == "E":
+            print("Enter custom salary values.")
+
+            #Gets new salary input
+            DEV_MANAGER_SALARY = int(input("Software Development Manager: "))
+            SENIOR_DEV_SALARY = int(input("Senior Software Developer: "))
+            MID_DEV_SALARY = int(input("Mid-level Software Developer: "))
+            JUNIOR_DEV_SALARY = int(input("Junior Software Developer: "))
+
+            #Writes custom salaries to salaries.txt
+            with open("salaries.txt", 'w') as file:
+                #Erases file contents
+                file.truncate(0)
+                file.writelines([str(DEV_MANAGER_SALARY) + "\n", str(SENIOR_DEV_SALARY) + "\n", str(MID_DEV_SALARY) + "\n", str(JUNIOR_DEV_SALARY)])
+                               
+        elif menu_select == "S":
+            #Reloads the module
+            importlib.reload(payroll)
+
+        elif menu_select == "D":
+            #Opens salaries.txt or creates it, assigning default (assumed salaries)
+            with open("salaries.txt", 'w') as file:
+                file.truncate(0)
+                file.writelines(["180000\n", "150000\n", "120000\n", "80000"])
+
+        else:
+            print ("Please enter a valid input.\n")
+            continue
+                       
+                
 elif menu_select == "E":
     quit()
-    
+ 
 elif menu_select == "42":
-    print("You found the answer to the ultimate question of life, the universe, and everything.\n")
+    #A random piece of culture
+    print("You found the Answer to the Ultimate Question of Life, The Universe, and Everything\n")
     print("Press any key to quit.")
     wait_to_close()
     
