@@ -280,11 +280,11 @@ elif menu_select == "S":
               "Junior Software Developer: {}\n".format(file_lines[0], file_lines[1], file_lines[2], file_lines[3]))
         
     while True:
-        menu_select = input("Enter: E => Edit salary details\n"
-                            "       S => Save and go back to main menu\n"
-                            "       D => Reset values to default\n").upper()
+        mode = input("Enter: E => Edit salary details\n"
+                     "       S => Save and go back to main menu\n"
+                     "       D => Reset values to default\n").upper()
           
-        if menu_select == "E":
+        if mode == "E":
             print("Enter custom salary values.")
 
             #Gets new salary input
@@ -299,11 +299,11 @@ elif menu_select == "S":
                 file.truncate(0)
                 file.writelines([str(DEV_MANAGER_SALARY) + "\n", str(SENIOR_DEV_SALARY) + "\n", str(MID_DEV_SALARY) + "\n", str(JUNIOR_DEV_SALARY)])
                                
-        elif menu_select == "S":
+        elif mode == "S":
             #Reloads the module
             importlib.reload(payroll)
 
-        elif menu_select == "D":
+        elif mode == "D":
             #Opens salaries.txt or creates it, assigning default (assumed salaries)
             with open("salaries.txt", 'w') as file:
                 file.truncate(0)
