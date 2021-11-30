@@ -265,7 +265,7 @@ elif menu_select == "S":
     #Default values for reference
     #DEV_MANAGER_SALARY = 180000
     #SENIOR_DEV_SALARY = 150000
-    #MID_DEV_SALARY = 120000
+    #MID_DEV_SALARY = 130000
     #JUNIOR_DEV_SALARY = 80000
 
     #Gets current salaries
@@ -307,7 +307,7 @@ elif menu_select == "S":
             #Opens salaries.txt or creates it, assigning default (assumed salaries)
             with open("salaries.txt", 'w') as file:
                 file.truncate(0)
-                file.writelines(["180000\n", "150000\n", "120000\n", "80000"])
+                file.writelines(["180000\n", "150000\n", "130000\n", "80000"])
 
         else:
             print ("Please enter a valid input.\n")
