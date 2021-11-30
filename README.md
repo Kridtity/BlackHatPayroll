@@ -22,7 +22,7 @@ This Year 11 Computer Science ATAR project is a payroll program system for hypot
 1. Superannuation is calculated at a rate of 10% gross income (pre-tax amount)
 2. Tax is calculated at the rates of the 2021–2022 financial year
 3. Software Development Managers receive an average annual salary of $180 000
-4. Senior Software Developers receive $150 000, Mid-level Software Developers $130 000, and Junior Software Developers $80 000 as their respective annual salary
+4. Senior Software Developers receive $150 000, Mid-level Software Developers $120 000, and Junior Software Developers $80 000 as their respective annual salary
 5. Employees work for a maximum of 38 hours per week (excluding overtime and other reasonable additional hours)
 6. The hourly rate for the employees will be calculated based on Assumption 4
 7. All employees work for 50 weeks of the year
