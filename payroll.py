@@ -245,7 +245,7 @@ elif menu_select == "H":
           " 8. Employees who work on public holidays get paid double time \n    for the hours they worked on that specific day\n"
           " 9. Employees who work overtime get paid time-and-a-half \n    for the hours they worked overtime on that specific day\n")
 
-    print("For more help, please consult the user manual at:\n"
+    print("For more help, please see the README.md document or consult the user manual at:\n"
           "https://github.com/Kridtity/BlackHatPayroll/blob/main/README.md\n")
 
     print("Enter \"OPEN\" to open the link or press any key to quit.")
