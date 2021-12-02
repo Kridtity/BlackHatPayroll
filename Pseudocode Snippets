@@ -84,7 +84,7 @@ End Function
 
 
 #Function to calculate wage and other financial details based on hourly rates
-Function CalculateFromWwage
+Function CalculateFromWage
     Pass In: Position, PayCycle, HoursWorked, OvertimeHoursWorked, HolidayHoursWorked
     
     #Gets employee pay details based on passed position
