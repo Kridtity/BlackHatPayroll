@@ -64,7 +64,7 @@ Two options are available in this menu:
 Whichever option chosen, the prompt 'Enter pay cycle in full weeks' refers to the number of full weeks in the chosen pay cycle, and the prompt 'Enter number of employees' refers to the number of employees who worked or are to be payed in/during/for the input pay cycle.  
 
 #### H => Calculate payroll based on hourly rate and hours worked
-This option is used for calculating the payroll during a pay cycle in which employees do not work the assumed standard 38 hours per week. It is used for calculating payrolls when employees work for more or less than 38 hours per week or the selected pay cycle equivalent, or if any employees have worked overtime or holiday hours during the pay cycle. 
+This option is used for calculating the payroll during a pay cycle in which employees do not work the assumed standard 38 hours per week. It is used for calculating payrolls when employees work for more or less than 38 hours per week or the selected pay cycle equivalent, or if any employees have worked overtime or holiday hours during the pay cycle. It can also be used for calculating employee pay details based on custom input hourly rate per employee.
 
 #### S => Calculate payroll based on annual salary
 This option is used for calculating the payroll when all employees worked 38 standard hours per week or their pay cycle equivalent. Overtime and holiday hours worked are not factored into calculations under this option.
