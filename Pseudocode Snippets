@@ -137,8 +137,10 @@ End Function
 FileLines = ReadLines(FileName)
 NumFileLines = Len(FileLines)
 X ← 0
+
 For X ← 1 to NumFileLines:
             Line = Re.Sub(r'\n', '', Line)
             Line = Re.Sub(r'\n\n\n', '\n\n', Line)
             
             Output(Line)
+End For
