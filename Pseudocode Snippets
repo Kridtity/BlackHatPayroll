@@ -131,3 +131,14 @@ Function CalculateFromSalary
     
     Pass Out: SalaryPortion, Superannuation, PayCycleTax, NetSalaryPortion
 End Function
+
+
+#Pseudocode to read lines from a file and print to the IDLE Shell
+FileLines = ReadLines(FileName)
+NumFileLines = Len(FileLines)
+X ← 0
+For X ← 1 to NumFileLines:
+            Line = Re.Sub(r'\n', '', Line)
+            Line = Re.Sub(r'\n\n\n', '\n\n', Line)
+            
+            Output(Line)
