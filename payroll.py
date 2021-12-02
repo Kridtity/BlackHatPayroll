@@ -55,20 +55,20 @@ print("------------------------------\n"
 menu_select = input("------------------------------\n"
                     "|         Main  Menu         |\n"
                     "------------------------------\n"
-                    "Enter: I => Input employee pay details\n"
-                    "       P => Print last payroll session in IDLE Shell/command line\n"
-                    "       H => Help manual\n"
-                    "       S => Change settings\n"
-                    "       E => Exit the program\n").upper()
+                    "Enter: I -> Input employee pay details\n"
+                    "       P -> Print last payroll session in IDLE Shell/command line\n"
+                    "       H -> Help manual\n"
+                    "       S -> Change settings\n"
+                    "       E -> Exit the program\n").upper()
 
 if menu_select == "I":
     #Print mode choices: hourly rate for hours worked in pay cycle or pay cycle amounts from annual salary
     mode = input("------------------------------\n"
                  "| Input employee pay details |\n"
                  "------------------------------\n"
-                 "Enter: H => Calculate payroll based on hourly rate\n"
+                 "Enter: H -> Calculate payroll based on hourly rate\n"
                  "            and hours worked\n"
-                 "       S => Calculate payroll based on annual salary\n").upper()
+                 "       S -> Calculate payroll based on annual salary\n").upper()
 
     if mode == "H":
         #Pay cyle to be used
@@ -77,6 +77,9 @@ if menu_select == "I":
         #Get number of employees for iteration
         num_employees = int(input("Enter number of employees: "))
         print("")
+        
+        #Input variable to choose whether hourly rate is calculated from annual salary or manually input
+        calc_option = int(input("Calculate hourly rate from annual salary (1) or manual input (2)?\n"))
 
         #Get employee details, calculate payment values, and append to list
         for x in range(num_employees):
@@ -91,27 +94,65 @@ if menu_select == "I":
             hours_worked = float(input("Standard hours worked in pay cycle: "))
             overtime_hours_worked = float(input("Overtime hours worked in pay cycle: "))
             holiday_hours_worked = float(input("Holiday hours worked in pay cycle: "))
+            print("")
+            hourly_rate = float(input("Enter hourly rate: "))
+            overtime_rate = float(hourly_rate * 1.5)
+            holiday_rate = float(hourly_rate * 2)
             print("\n"
                   "------------------------------\n")
 
-            #Calculate payment values
-            #Note: calculate_from_wage function tuple value order is wage, superannuation, paycycle_tax, net_wage
-            payment_values = paymod.calculate_from_wage(position, paycycle, hours_worked, overtime_hours_worked, holiday_hours_worked)            
+            if calc_option == 1:
+                #Calculate payment values
+                #Note: calculate_from_wage function tuple value order is wage, superannuation, paycycle_tax, net_wage
+                payment_values = paymod.calculate_from_wage(position, paycycle, hours_worked, overtime_hours_worked, holiday_hours_worked)            
+
+                #Append values to lists
+                first_names_list.append(first_name)
+                last_names_list.append(last_name)
+                positions_list.append(position)
+                hours_list.append(hours_worked)
+                overtime_hours_list.append(overtime_hours_worked)
+                holiday_hours_list.append(holiday_hours_worked)
+                salaries_list.append(paymod.employee_pay_details(position)[0])
+                gross_incomes_list.append(payment_values[0])
+                net_incomes_list.append(payment_values[3])
+                taxes_list.append(payment_values[2])
+                supers_list.append(payment_values[1])
             
-            #Append values to lists
-            first_names_list.append(first_name)
-            last_names_list.append(last_name)
-            positions_list.append(position)
-            hours_list.append(hours_worked)
-            overtime_hours_list.append(overtime_hours_worked)
-            holiday_hours_list.append(holiday_hours_worked)
-            salaries_list.append(paymod.employee_pay_details(position)[0])
-            gross_incomes_list.append(payment_values[0])
-            net_incomes_list.append(payment_values[3])
-            taxes_list.append(payment_values[2])
-            supers_list.append(payment_values[1])
-        
-                  
+            elif calc_option == 2:
+                #Calculate estimated salary
+                salary = hourly_rate * 38 * 50
+                
+                #Calculates wages based on hourly input
+                wage = float((hourly_rate * hours_worked) + (overtime_rate * overtime_hours_worked) + (holiday_rate * holiday_hours_worked))
+
+                #Calculates superannuation for pay cycle based on wage (rate at 10% pre-tax amount)
+                superannuation = float(wage * 0.1)
+
+                #Calculates tax withheld from pay cycle
+                paycycle_tax = float(paymod.calculate_tax_from_wage(wage, paycycle))
+
+                #Calculates net wage
+                net_wage = float(wage - superannuation - paycycle_tax)
+
+                #Append values to lists
+                first_names_list.append(first_name)
+                last_names_list.append(last_name)
+                positions_list.append(position)
+                hours_list.append(hours_worked)
+                overtime_hours_list.append(overtime_hours_worked)
+                holiday_hours_list.append(holiday_hours_worked)
+                salaries_list.append(salary)
+                gross_incomes_list.append(wage)
+                net_incomes_list.append(net_wage)
+                taxes_list.append(paycycle_tax)
+                supers_list.append(superannuation)
+
+            else:
+                print("Please enter a valid input.\n")
+                print("Press any key to quit.")
+                wait_to_close()
+                           
     elif mode == "S":
         #Pay cyle to be used
         paycycle = int(input("Enter pay cycle in full weeks: "))
@@ -280,9 +321,9 @@ elif menu_select == "S":
               "Junior Software Developer: {}\n".format(file_lines[0], file_lines[1], file_lines[2], file_lines[3]))
         
     while True:
-        mode = input("Enter: E => Edit salary details\n"
-                     "       S => Save and go back to main menu\n"
-                     "       D => Reset values to default\n").upper()
+        mode = input("Enter: E -> Edit salary details\n"
+                     "       S -> Save and go back to main menu\n"
+                     "       D -> Reset values to default\n").upper()
           
         if mode == "E":
             print("Enter custom salary values.")
@@ -312,8 +353,7 @@ elif menu_select == "S":
         else:
             print ("Please enter a valid input.\n")
             continue
-                       
-                
+                                   
 elif menu_select == "E":
     quit()
  
