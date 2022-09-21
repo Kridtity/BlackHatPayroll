@@ -2,6 +2,8 @@
 ## Description
 This Year 11 Computer Science ATAR project is a payroll program system for hypothetical company 'BlackHat IT'. It accepts inputs for employee details such as name, position, and hours worked to calculate the payroll information for the employee for the input pay cycle. Payroll information output from the program includes: assumed salary based on job position, standard hours worked, overtime hours worked, holiday hours worked and gross income, superannuation withheld, tax payable, and net income for the input pay cycle.
 
+Part of a programming assessment to complete the course.
+
 ## User Manual
 ### Contents
 1. [Part A](#part-a)
